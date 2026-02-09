@@ -1,0 +1,200 @@
+Vercel CLI 50.13.2
+> [debug] [2026-02-09T07:42:26.173Z] user supplied a possible target for deployment or an extension
+> [debug] [2026-02-09T07:42:26.229Z] failed to find extension command with name "vercel---prod"
+> [debug] [2026-02-09T07:42:26.280Z] Setting target to production
+> [debug] [2026-02-09T07:42:26.282Z] Arrived at home directory
+> [debug] [2026-02-09T07:42:26.342Z] Arrived at home directory
+> [debug] [2026-02-09T07:42:26.342Z] Aborting search for repo root
+> [debug] [2026-02-09T07:42:26.395Z] Spinner invoked (Retrieving project…) with a 1000ms delay
+> [debug] [2026-02-09T07:42:26.397Z] Valid access token, skipping token refresh.
+> [debug] [2026-02-09T07:42:26.398Z] Valid access token, skipping token refresh.
+> [debug] [2026-02-09T07:42:26.427Z] #1 → GET https://api.vercel.com/teams/team_1hkwWPMhwDW8LlqJYMvT687P?teamId=team_1hkwWPMhwDW8LlqJYMvT687P
+> [debug] [2026-02-09T07:42:26.431Z] #2 → GET https://api.vercel.com/v9/projects/prj_yWaZJrsi1qfwfGQMFxfVZJxDXzf9?teamId=team_1hkwWPMhwDW8LlqJYMvT687P
+> [debug] [2026-02-09T07:42:26.951Z] #1 ← 200 OK: sfo1::7qv9f-1770622946918-04c2f31c1cd9 [523ms]
+> [debug] [2026-02-09T07:42:27.274Z] #2 ← 200 OK: sfo1::dlnnl-1770622947011-e7e5fd62bc8c [843ms]
+> [debug] [2026-02-09T07:42:27.276Z] Error while parsing repo data: ENOENT: no such file or directory, open 'C:\Users\User\Desktop\quotation saas\.git\config'
+> [debug] [2026-02-09T07:42:27.327Z] Failed to get last commit. The directory is likely not a Git repo, there are no latest commits, or it is corrupted.
+Error: this does not look like a git repo
+> [debug] [2026-02-09T07:42:27.334Z] Spinner invoked (Deploying youngchankims-projects/quotation-saas) with a 0ms delay
+[client-debug] 2026-02-09T07:42:27.334Z Creating deployment...
+[client-debug] 2026-02-09T07:42:27.335Z Provided 'path' is a directory.
+[client-debug] 2026-02-09T07:42:27.337Z Found 26 rules in .vercelignore
+[client-debug] 2026-02-09T07:42:27.337Z Building file tree...
+[client-debug] 2026-02-09T07:42:27.349Z Found 55 files in the specified directory
+[client-debug] 2026-02-09T07:42:27.360Z Yielding a 'hashes-calculated' event with 55 hashes
+> [debug] [2026-02-09T07:42:27.361Z] Valid access token, skipping token refresh.
+> [debug] [2026-02-09T07:42:27.362Z] #3 → GET https://api.vercel.com/v9/projects/quotation-saas?teamId=team_1hkwWPMhwDW8LlqJYMvT687P
+> [debug] [2026-02-09T07:42:27.823Z] #3 ← 200 OK: sfo1::dlnnl-1770622947556-fae290454d42 [461ms]
+[client-debug] 2026-02-09T07:42:27.824Z Using provided API URL: https://api.vercel.com
+[client-debug] 2026-02-09T07:42:27.824Z Using provided user agent: vercel 50.13.2 node-v24.13.0 win32 (x64)
+[client-debug] 2026-02-09T07:42:27.824Z Setting platform version to harcoded value 2
+[client-debug] 2026-02-09T07:42:27.824Z Creating the deployment and starting upload...
+[client-debug] 2026-02-09T07:42:27.825Z Determining necessary files for upload...
+[client-debug] 2026-02-09T07:42:27.825Z Creating deployment
+[client-debug] 2026-02-09T07:42:27.826Z Sending deployment creation API request
+[client-debug] 2026-02-09T07:42:28.501Z Deployment response: {"error":{"code":"missing_files","message":"Missing files","missing":["13c61434d872f940b8f0308ec4f5ab674863061e"]}}
+[client-debug] 2026-02-09T07:42:28.501Z Error: Deployment request status is 400
+[client-debug] 2026-02-09T07:42:28.501Z 1 files are required to upload
+[client-debug] 2026-02-09T07:42:28.501Z Yielding a 'file-count' event
+> [debug] [2026-02-09T07:42:28.501Z] Total files 55, 1 changed
+> [debug] [2026-02-09T07:42:28.502Z] Spinner invoked (Uploading [--------------------] (0.0B/2KB)) with a 0ms delay
+[client-debug] 2026-02-09T07:42:28.502Z Building an upload list...
+[client-debug] 2026-02-09T07:42:28.502Z Starting upload
+[client-debug] 2026-02-09T07:42:28.503Z POST https://api.vercel.com/v2/files?teamId=team_1hkwWPMhwDW8LlqJYMvT687P
+> [debug] [2026-02-09T07:42:28.503Z] Spinner invoked (Uploading [====================] (2.0KB/2KB)) with a 0ms delay
+[client-debug] 2026-02-09T07:42:28.977Z DONE in 474ms: POST https://api.vercel.com/v2/files?teamId=team_1hkwWPMhwDW8LlqJYMvT687P
+[client-debug] 2026-02-09T07:42:28.977Z File 13c61434d872f940b8f0308ec4f5ab674863061e (C:\Users\User\Desktop\quotation saas\deployment_log.txt) uploaded
+[client-debug] 2026-02-09T07:42:28.977Z Yielding a 'file-uploaded' event
+> [debug] [2026-02-09T07:42:28.977Z] Uploaded: C:\Users\User\Desktop\quotation saas\deployment_log.txt (2KB)
+[client-debug] 2026-02-09T07:42:28.977Z All files uploaded
+[client-debug] 2026-02-09T07:42:28.977Z Yielding a 'all-files-uploaded' event
+[client-debug] 2026-02-09T07:42:28.977Z Starting deployment creation
+[client-debug] 2026-02-09T07:42:28.977Z Creating deployment
+[client-debug] 2026-02-09T07:42:28.978Z Sending deployment creation API request
+[client-debug] 2026-02-09T07:42:30.540Z Deployment response: {"alias":["quotation-saas-youngchankims-projects.vercel.app","quotation-saas-buddhai-youngchankims-projects.vercel.app"],"aliasAssigned":false,"automaticAliases":["quotation-saas-youngchankims-projects.vercel.app","quotation-saas-buddhai-youngchankims-projects.vercel.app"],"bootedAt":1770622949972,"buildingAt":1770622949972,"buildSkipped":false,"createdAt":1770622949972,"creator":{"uid":"UCTeHFwR2jNyDcoxrezpCiNx","username":"buddhai"},"id":"dpl_BAoCCbWUWM5Gk6PfmreUdRLefQDn","name":"quotation-saas","meta":{},"originCacheRegion":"iad1","project":{"id":"prj_yWaZJrsi1qfwfGQMFxfVZJxDXzf9","name":"quotation-saas","framework":"nextjs"},"public":false,"readyState":"INITIALIZING","regions":["iad1"],"source":"cli","status":"INITIALIZING","target":"production","team":{"id":"team_1hkwWPMhwDW8LlqJYMvT687P","name":"youngchankim's projects","slug":"youngchankims-projects"},"type":"LAMBDAS","url":"quotation-saas-nlb7ufp81-youngchankims-projects.vercel.app","version":2,"previewCommentsEnabled":true,"oidcTokenClaims":{"sub":"owner:youngchankims-projects:project:quotation-saas:environment:production","iss":"https://oidc.vercel.com/youngchankims-projects","scope":"owner:youngchankims-projects:project:quotation-saas:environment:production","aud":"https://vercel.com/youngchankims-projects","owner":"youngchankims-projects","owner_id":"team_1hkwWPMhwDW8LlqJYMvT687P","project":"quotation-saas","project_id":"prj_yWaZJrsi1qfwfGQMFxfVZJxDXzf9","environment":"production","plan":"hobby"},"lambdas":[{"id":"bld_bzetu8bab","createdAt":1770622950203,"entrypoint":".","readyState":"READY","readyStateAt":1770622950203,"output":[]}],"aliasAssignedAt":null,"build":{"env":[]},"builds":[],"createdIn":"sfo1","env":[],"functions":null,"inspectorUrl":"https://vercel.com/youngchankims-projects/quotation-saas/BAoCCbWUWM5Gk6PfmreUdRLefQDn","isInConcurrentBuildsQueue":false,"isInSystemBuildsQueue":true,"ownerId":"team_1hkwWPMhwDW8LlqJYMvT687P","plan":"hobby","projectId":"prj_yWaZJrsi1qfwfGQMFxfVZJxDXzf9","projectSettings":{"buildCommand":null,"devCommand":null,"framework":"nextjs","commandForIgnoringBuildStep":null,"installCommand":null,"outputDirectory":null,"speedInsights":{"id":"b5sKLPMJEZUwFLIPwBHawUgQHx5","hasData":false},"webAnalytics":{"id":"9ZPrm8ieSWMMVbHGWVArdf5OW"},"nodeVersion":"24.x"},"routes":null,"config":{"version":1,"secureComputePrimaryRegion":null,"secureComputeFallbackRegion":null,"functionTimeout":300,"functionType":"fluid","functionMemoryType":"standard","isUsingActiveCPU":true,"resourceConfig":{"buildQueue":{"configuration":"SKIP_NAMESPACE_QUEUE"}}}}
+[client-debug] 2026-02-09T07:42:30.540Z Deployment created
+[client-debug] 2026-02-09T07:42:30.540Z Yielding a 'created' event
+Inspect: https://vercel.com/youngchankims-projects/quotation-saas/BAoCCbWUWM5Gk6PfmreUdRLefQDn [3s]
+Production: https://quotation-saas-nlb7ufp81-youngchankims-projects.vercel.app [3s]
+https://quotation-saas-nlb7ufp81-youngchankims-projects.vercel.app> [debug] [2026-02-09T07:42:30.540Z] Valid access token, skipping token refresh.
+> [debug] [2026-02-09T07:42:30.541Z] Spinner invoked (Building...) with a 0ms delay
+> [debug] [2026-02-09T07:42:30.541Z] #4 → GET https://api.vercel.com/v2/user
+[client-debug] 2026-02-09T07:42:30.541Z Waiting for deployment to be ready...
+[client-debug] 2026-02-09T07:42:30.541Z Waiting for builds and the deployment to complete...
+> [debug] [2026-02-09T07:42:30.772Z] #4 ← 200 OK: sfo1::dlnnl-1770622950735-de10d4f7136e [231ms]
+> [debug] [2026-02-09T07:42:30.773Z] Valid access token, skipping token refresh.
+> [debug] [2026-02-09T07:42:30.773Z] #5 → GET https://api.vercel.com/v3/now/deployments/dpl_BAoCCbWUWM5Gk6PfmreUdRLefQDn/events?direction=forward&follow=1&format=lines&teamId=team_1hkwWPMhwDW8LlqJYMvT687P
+[client-debug] 2026-02-09T07:42:32.780Z Deployment state changed to BUILDING
+[client-debug] 2026-02-09T07:42:32.780Z Yielding a 'building' event
+> [debug] [2026-02-09T07:42:32.780Z] Spinner invoked (Building...) with a 0ms delay
+> [debug] [2026-02-09T07:42:33.381Z] #5 ← 200 OK: sfo1::dlnnl-1770622950970-8d220909878e [2.61s]
+> [debug] [2026-02-09T07:42:33.382Z] Spinner invoked (Building: Running build in Washington, D.C., USA (East) – iad1) with a 0ms delay
+> [debug] [2026-02-09T07:42:33.382Z] Spinner invoked (Building: Build machine configuration: 2 cores, 8 GB) with a 0ms delay
+> [debug] [2026-02-09T07:42:33.382Z] Spinner invoked (Building: Retrieving list of deployment files...) with a 0ms delay
+> [debug] [2026-02-09T07:42:33.382Z] Spinner invoked (Building: Previous build caches not available.) with a 0ms delay
+> [debug] [2026-02-09T07:42:33.382Z] Spinner invoked (Building: Downloading 55 deployment files...) with a 0ms delay
+> [debug] [2026-02-09T07:42:34.411Z] Spinner invoked (Building: Running "vercel build") with a 0ms delay
+> [debug] [2026-02-09T07:42:36.474Z] Spinner invoked (Building: Vercel CLI 50.11.0) with a 0ms delay
+> [debug] [2026-02-09T07:42:36.474Z] Spinner invoked (Building: Installing dependencies...) with a 0ms delay
+> [debug] [2026-02-09T07:42:58.157Z] Spinner invoked (Building: added 411 packages in 21s) with a 0ms delay
+> [debug] [2026-02-09T07:42:58.157Z] Spinner invoked (Building: 151 packages are looking for funding) with a 0ms delay
+> [debug] [2026-02-09T07:42:58.157Z] Spinner invoked (Building: run `npm fund` for details) with a 0ms delay
+> [debug] [2026-02-09T07:42:58.157Z] Spinner invoked (Building: Detected Next.js version: 16.1.6) with a 0ms delay
+> [debug] [2026-02-09T07:42:58.157Z] Spinner invoked (Building: Running "npm run build") with a 0ms delay
+> [debug] [2026-02-09T07:42:58.157Z] Spinner invoked (Building: > smart-quote@0.1.0 build) with a 0ms delay
+> [debug] [2026-02-09T07:42:58.157Z] Spinner invoked (Building: > next build) with a 0ms delay
+> [debug] [2026-02-09T07:42:58.157Z] Spinner invoked (Building: Attention: Next.js now collects completely anonymous telemetry regarding usage.) with a 0ms delay
+> [debug] [2026-02-09T07:42:58.157Z] Spinner invoked (Building: This information is used to shape Next.js' roadmap and prioritize features.) with a 0ms delay
+> [debug] [2026-02-09T07:42:58.157Z] Spinner invoked (Building: You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:) with a 0ms delay
+> [debug] [2026-02-09T07:42:58.157Z] Spinner invoked (Building: https://nextjs.org/telemetry) with a 0ms delay
+> [debug] [2026-02-09T07:42:58.157Z] Spinner invoked (Building: ▲ Next.js 16.1.6 (Turbopack)) with a 0ms delay
+> [debug] [2026-02-09T07:42:58.157Z] Spinner invoked (Building: - Environments: .env) with a 0ms delay
+> [debug] [2026-02-09T07:42:58.157Z] Spinner invoked (Building: Creating an optimized production build ...) with a 0ms delay
+> [debug] [2026-02-09T07:43:14.715Z] Spinner invoked (Building: ✓ Compiled successfully in 15.9s) with a 0ms delay
+> [debug] [2026-02-09T07:43:14.715Z] Spinner invoked (Building: Running TypeScript ...) with a 0ms delay
+> [debug] [2026-02-09T07:43:19.878Z] Spinner invoked (Building: Collecting page data using 1 worker ...) with a 0ms delay
+> [debug] [2026-02-09T07:43:19.878Z] Spinner invoked (Building: Prisma has detected that this project was built on Vercel, which caches dependencies. This leads to an outdated Prisma Client because Prisma's auto-generation isn't triggered. To fix this, make sure to run the `prisma generate` command during the build process.) with a 0ms delay
+> [debug] [2026-02-09T07:43:19.878Z] Spinner invoked (Building: Learn how: https://pris.ly/d/vercel-build) with a 0ms delay
+> [debug] [2026-02-09T07:43:19.878Z] Spinner invoked (Building: Error: Failed to collect configuration for /project/[projectId]) with a 0ms delay
+> [debug] [2026-02-09T07:43:19.878Z] Spinner invoked (Building: at ignore-listed frames {) with a 0ms delay
+> [debug] [2026-02-09T07:43:19.878Z] Spinner invoked (Building: [cause]: Error [PrismaClientInitializationError]: Prisma has detected that this project was built on Vercel, which caches dependencies. This leads to an outdated Prisma Client because Prisma's auto-generation isn't triggered. To fix this, make sure to run the `prisma generate` command during the build process.) with a 0ms delay
+> [debug] [2026-02-09T07:43:19.879Z] Spinner invoked (Building: Learn how: https://pris.ly/d/vercel-build) with a 0ms delay
+> [debug] [2026-02-09T07:43:19.879Z] Spinner invoked (Building: at module evaluation (.next/server/chunks/ssr/[root-of-the-server]__b3615ec7._.js:1:2268)) with a 0ms delay
+> [debug] [2026-02-09T07:43:19.879Z] Spinner invoked (Building: at instantiateModule (.next/server/chunks/ssr/[turbopack]_runtime.js:740:9)) with a 0ms delay
+> [debug] [2026-02-09T07:43:19.879Z] Spinner invoked (Building: at getOrInstantiateModuleFromParent (.next/server/chunks/ssr/[turbopack]_runtime.js:763:12)) with a 0ms delay
+> [debug] [2026-02-09T07:43:19.879Z] Spinner invoked (Building: at Context.esmImport [as i] (.next/server/chunks/ssr/[turbopack]_runtime.js:228:20)) with a 0ms delay
+> [debug] [2026-02-09T07:43:19.879Z] Spinner invoked (Building: at module evaluation (.next/server/chunks/ssr/_0847b519._.js:20:326)) with a 0ms delay
+> [debug] [2026-02-09T07:43:19.879Z] Spinner invoked (Building: at instantiateModule (.next/server/chunks/ssr/[turbopack]_runtime.js:740:9)) with a 0ms delay
+> [debug] [2026-02-09T07:43:19.879Z] Spinner invoked (Building: at getOrInstantiateModuleFromParent (.next/server/chunks/ssr/[turbopack]_runtime.js:763:12)) with a 0ms delay
+> [debug] [2026-02-09T07:43:19.879Z] Spinner invoked (Building: at Context.esmImport [as i] (.next/server/chunks/ssr/[turbopack]_runtime.js:228:20) {) with a 0ms delay
+> [debug] [2026-02-09T07:43:19.879Z] Spinner invoked (Building: clientVersion: '5.22.0',) with a 0ms delay
+> [debug] [2026-02-09T07:43:19.879Z] Spinner invoked (Building: errorCode: undefined) with a 0ms delay
+> [debug] [2026-02-09T07:43:19.879Z] Spinner invoked (Building: }) with a 0ms delay
+> [debug] [2026-02-09T07:43:19.879Z] Spinner invoked (Building: }) with a 0ms delay
+> [debug] [2026-02-09T07:43:19.879Z] Spinner invoked (Building: > Build error occurred) with a 0ms delay
+> [debug] [2026-02-09T07:43:19.879Z] Spinner invoked (Building: Error: Failed to collect page data for /project/[projectId]) with a 0ms delay
+> [debug] [2026-02-09T07:43:19.879Z] Spinner invoked (Building: at ignore-listed frames {) with a 0ms delay
+> [debug] [2026-02-09T07:43:19.879Z] Spinner invoked (Building: type: 'Error') with a 0ms delay
+> [debug] [2026-02-09T07:43:19.879Z] Spinner invoked (Building: }) with a 0ms delay
+> [debug] [2026-02-09T07:43:19.879Z] Spinner invoked (Building: Error: Command "npm run build" exited with 1) with a 0ms delay
+[client-debug] 2026-02-09T07:43:25.306Z Yielding a 'error' event
+> [debug] [2026-02-09T07:43:25.307Z] Error: Error: Command "npm run build" exited with 1
+Error: Command "npm run build" exited with 1
+    at Now.handleDeploymentError (file:///C:/Users/User/AppData/Local/npm-cache/_npx/69f9afb961c37556/node_modules/vercel/dist/index.js:158296:18)
+    at processDeployment (file:///C:/Users/User/AppData/Local/npm-cache/_npx/69f9afb961c37556/node_modules/vercel/dist/index.js:158038:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Now.create (file:///C:/Users/User/AppData/Local/npm-cache/_npx/69f9afb961c37556/node_modules/vercel/dist/index.js:158195:28)
+    at async createDeploy (file:///C:/Users/User/AppData/Local/npm-cache/_npx/69f9afb961c37556/node_modules/vercel/dist/index.js:158449:12)
+    at async deploy_default (file:///C:/Users/User/AppData/Local/npm-cache/_npx/69f9afb961c37556/node_modules/vercel/dist/index.js:159364:22)
+    at async main19 (file:///C:/Users/User/AppData/Local/npm-cache/_npx/69f9afb961c37556/node_modules/vercel/dist/index.js:199683:19)
+> [debug] [2026-02-09T07:43:25.308Z] Valid access token, skipping token refresh.
+> [debug] [2026-02-09T07:43:25.308Z] #6 → GET https://api.vercel.com/v13/deployments/quotation-saas-nlb7ufp81-youngchankims-projects.vercel.app?teamId=team_1hkwWPMhwDW8LlqJYMvT687P
+> [debug] [2026-02-09T07:43:25.931Z] #6 ← 200 OK: sfo1::7qv9f-1770623005496-0c22885698cd [622ms]
+> [debug] [2026-02-09T07:43:25.931Z] Valid access token, skipping token refresh.
+> [debug] [2026-02-09T07:43:25.932Z] #7 → GET https://api.vercel.com/v2/user
+> [debug] [2026-02-09T07:43:26.145Z] #7 ← 200 OK: sfo1::7qv9f-1770623006119-0a0f38b3c60f [213ms]
+> [debug] [2026-02-09T07:43:26.146Z] Valid access token, skipping token refresh.
+> [debug] [2026-02-09T07:43:26.146Z] #8 → GET https://api.vercel.com/v3/now/deployments/dpl_BAoCCbWUWM5Gk6PfmreUdRLefQDn/events?direction=forward&follow=1&format=lines&teamId=team_1hkwWPMhwDW8LlqJYMvT687P
+> [debug] [2026-02-09T07:43:26.542Z] #8 ← 200 OK: sfo1::7qv9f-1770623006334-f1045ced5cd0 [396ms]
+2026-02-09T07:42:30.796Z  Running build in Washington, D.C., USA (East) – iad1
+2026-02-09T07:42:30.796Z  Build machine configuration: 2 cores, 8 GB
+2026-02-09T07:42:30.908Z  Retrieving list of deployment files...
+2026-02-09T07:42:30.910Z  Previous build caches not available.
+2026-02-09T07:42:31.493Z  Downloading 55 deployment files...
+2026-02-09T07:42:32.038Z  Running "vercel build"
+2026-02-09T07:42:33.392Z  Vercel CLI 50.11.0
+2026-02-09T07:42:33.687Z  Installing dependencies...
+2026-02-09T07:42:54.563Z  
+2026-02-09T07:42:54.564Z  added 411 packages in 21s
+2026-02-09T07:42:54.564Z  
+2026-02-09T07:42:54.564Z  151 packages are looking for funding
+2026-02-09T07:42:54.564Z  run `npm fund` for details
+2026-02-09T07:42:54.627Z  Detected Next.js version: 16.1.6
+2026-02-09T07:42:54.632Z  Running "npm run build"
+2026-02-09T07:42:54.728Z  
+2026-02-09T07:42:54.728Z  > smart-quote@0.1.0 build
+2026-02-09T07:42:54.729Z  > next build
+2026-02-09T07:42:54.729Z  
+2026-02-09T07:42:55.472Z  Attention: Next.js now collects completely anonymous telemetry regarding usage.
+2026-02-09T07:42:55.473Z  This information is used to shape Next.js' roadmap and prioritize features.
+2026-02-09T07:42:55.473Z  You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+2026-02-09T07:42:55.473Z  https://nextjs.org/telemetry
+2026-02-09T07:42:55.473Z  
+2026-02-09T07:42:55.486Z  ▲ Next.js 16.1.6 (Turbopack)
+2026-02-09T07:42:55.486Z  - Environments: .env
+2026-02-09T07:42:55.486Z  
+2026-02-09T07:42:55.523Z  Creating an optimized production build ...
+2026-02-09T07:43:11.871Z  ✓ Compiled successfully in 15.9s
+2026-02-09T07:43:11.873Z  Running TypeScript ...
+2026-02-09T07:43:16.517Z  Collecting page data using 1 worker ...
+2026-02-09T07:43:16.917Z  Prisma has detected that this project was built on Vercel, which caches dependencies. This leads to an outdated Prisma Client because Prisma's auto-generation isn't triggered. To fix this, make sure to run the `prisma generate` command during the build process.
+2026-02-09T07:43:16.918Z  
+2026-02-09T07:43:16.918Z  Learn how: https://pris.ly/d/vercel-build
+2026-02-09T07:43:16.922Z  Error: Failed to collect configuration for /project/[projectId]
+2026-02-09T07:43:16.922Z  at ignore-listed frames {
+2026-02-09T07:43:16.922Z  [cause]: Error [PrismaClientInitializationError]: Prisma has detected that this project was built on Vercel, which caches dependencies. This leads to an outdated Prisma Client because Prisma's auto-generation isn't triggered. To fix this, make sure to run the `prisma generate` command during the build process.
+2026-02-09T07:43:16.922Z  
+2026-02-09T07:43:16.922Z  Learn how: https://pris.ly/d/vercel-build
+2026-02-09T07:43:16.922Z  at module evaluation (.next/server/chunks/ssr/[root-of-the-server]__b3615ec7._.js:1:2268)
+2026-02-09T07:43:16.923Z  at instantiateModule (.next/server/chunks/ssr/[turbopack]_runtime.js:740:9)
+2026-02-09T07:43:16.923Z  at getOrInstantiateModuleFromParent (.next/server/chunks/ssr/[turbopack]_runtime.js:763:12)
+2026-02-09T07:43:16.923Z  at Context.esmImport [as i] (.next/server/chunks/ssr/[turbopack]_runtime.js:228:20)
+2026-02-09T07:43:16.923Z  at module evaluation (.next/server/chunks/ssr/_0847b519._.js:20:326)
+2026-02-09T07:43:16.923Z  at instantiateModule (.next/server/chunks/ssr/[turbopack]_runtime.js:740:9)
+2026-02-09T07:43:16.923Z  at getOrInstantiateModuleFromParent (.next/server/chunks/ssr/[turbopack]_runtime.js:763:12)
+2026-02-09T07:43:16.923Z  at Context.esmImport [as i] (.next/server/chunks/ssr/[turbopack]_runtime.js:228:20) {
+2026-02-09T07:43:16.923Z  clientVersion: '5.22.0',
+2026-02-09T07:43:16.923Z  errorCode: undefined
+2026-02-09T07:43:16.923Z  }
+2026-02-09T07:43:16.923Z  }
+2026-02-09T07:43:17.428Z  
+2026-02-09T07:43:17.429Z  > Build error occurred
+2026-02-09T07:43:17.431Z  Error: Failed to collect page data for /project/[projectId]
+2026-02-09T07:43:17.431Z  at ignore-listed frames {
+2026-02-09T07:43:17.431Z  type: 'Error'
+2026-02-09T07:43:17.431Z  }
+2026-02-09T07:43:17.477Z  Error: Command "npm run build" exited with 1
+> [debug] [2026-02-09T07:43:27.984Z] Vercel CLI 50.13.2
+
+> [debug] [2026-02-09T07:43:28.456Z] Telemetry event tracked
+> [debug] [2026-02-09T07:43:28.475Z] Telemetry subprocess exited with code 0

@@ -1,0 +1,91 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  image     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  teams     Team[]     @relation("TeamOwner")
+  memberships TeamMember[]
+}
+
+model Team {
+  id        String       @id @default(cuid())
+  name      String
+  logoUrl   String?      // URL for team logo
+  ownerId   String
+  owner     User         @relation("TeamOwner", fields: [ownerId], references: [id])
+  members   TeamMember[]
+  projects  Project[]
+  products  Product[]
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+}
+
+model TeamMember {
+  id        String   @id @default(cuid())
+  teamId    String
+  team      Team     @relation(fields: [teamId], references: [id])
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  role      String   @default("MEMBER") // OWNER, ADMIN, MEMBER
+  joinedAt  DateTime @default(now())
+
+  @@unique([teamId, userId])
+}
+
+model Project {
+  id        String    @id @default(cuid())
+  name      String
+  teamId    String
+  team      Team      @relation(fields: [teamId], references: [id])
+  quotes    Quote[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Quote {
+  id        String   @id @default(cuid())
+  title     String
+  content   String   // JSON string for quote items
+  amount    Float    @default(0)
+  type      String   @default("PURCHASE") // PURCHASE, RENTAL
+  template  String   @default("standard") // standard, modern, simple
+
+  status    String   @default("DRAFT") // DRAFT, SENT, ACCEPTED, SIGNED
+  
+  recipientEmail String?
+  recipientName  String?
+  sentAt         DateTime?
+  viewedAt       DateTime?
+  signedAt       DateTime?
+  signature      String? 
+
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  teamId      String
+  team        Team     @relation(fields: [teamId], references: [id])
+  name        String
+  description String?
+  imageUrl    String?
+  specs       String?  // JSON array of strings
+  price       Float    @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

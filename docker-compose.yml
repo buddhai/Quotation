@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  app:
+    container_name: quotation-saas
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL="file:./dev.db"
+      - NEXTAUTH_URL=http://localhost:3000
+      - NEXTAUTH_SECRET=your-secret-key-change-me
+    volumes:
+      - ./dev.db:/app/dev.db

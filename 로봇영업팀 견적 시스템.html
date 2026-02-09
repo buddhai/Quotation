@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJ네트웍스 | 로봇영업팀 견적 시스템</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        
+        :root {
+            --aj-red: #E30613;
+            --aj-gray: #414042;
+            --aj-light-gray: #9CA3AF;
+            --aj-bg-paper: #FAFAFA;
+        }
+
+        body { 
+            font-family: 'Noto Sans KR', sans-serif; 
+            background-color: #F3F4F6; color: var(--aj-gray);
+            margin: 0; display: flex; height: 100vh; overflow: hidden;
+        }
+        
+        /* [Admin] 정갈한 사이드바 */
+        .admin-sidebar {
+            width: 550px; height: 100vh; background: white; 
+            border-right: 1px solid #E5E7EB; padding: 40px; overflow-y: auto; flex-shrink: 0;
+        }
+
+        /* [Preview] 작업 공간 */
+        .preview-main {
+            flex-grow: 1; height: 100vh; padding: 40px; 
+            overflow-y: auto; display: flex; justify-content: center;
+        }
+
+        #pdfArea { 
+            width: 210mm; min-height: 296mm; padding: 25mm 20mm;
+            background: white; box-sizing: border-box; display: flex; flex-direction: column;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* 정제된 품목 레이아웃 */
+        .item-row { 
+            display: flex; align-items: flex-start; padding: 20px 0;
+            border-bottom: 1px solid #F1F1F1;
+        }
+        
+        .no-badge { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 11px; color: #CCC; width: 30px; margin-top: 2px; }
+        
+        /* 스펙 태그 (색상 톤 다운) */
+        .spec-tag { 
+            background: #F9FAFB; color: #6B7280; border: 1px solid #F3F4F6;
+            padding: 2px 8px; border-radius: 4px; font-size: 9.5px;
+            margin-right: 5px; margin-bottom: 5px; display: inline-block;
+        }
+
+        .info-label { font-size: 8px; color: #999; font-weight: 700; text-transform: uppercase; margin-bottom: 2px; }
+        .info-value { font-size: 13px; font-weight: 700; color: var(--aj-gray); }
+
+        @media print { .no-print { display: none; } }
+        .html2pdf__page-break { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="admin-sidebar no-print">
+    <div class="mb-10 pb-6 border-b">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-lg font-bold tracking-tight">로봇영업팀 견적 시스템</h1>
+            <button onclick="downloadPDF()" class="bg-gray-900 text-white px-5 py-2 rounded-lg font-bold text-xs hover:bg-black transition shadow-lg">
+                PDF 저장하기
+            </button>
+        </div>
+        <div class="flex gap-2">
+            <button onclick="setMode('rental')" id="mRental" class="flex-1 py-2.5 rounded-lg font-bold text-white text-xs transition" style="background-color: var(--aj-red);">렌탈 모드</button>
+            <button onclick="setMode('purchase')" id="mPurchase" class="flex-1 py-2.5 rounded-lg font-bold bg-gray-100 text-gray-500 text-xs transition">구매 모드</button>
+        </div>
+    </div>
+
+    <div class="space-y-8">
+        <section>
+            <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3">01. 담당자</p>
+            <select id="inManager" onchange="render()" class="w-full p-3.5 bg-gray-50 border-none rounded-xl outline-none font-bold text-sm ring-1 ring-gray-200 focus:ring-2 focus:ring-red-500 transition-all">
+                <option value="yckim">김영찬 매니저</option>
+                <option value="ljm">이정민 매니저</option>
+                <option value="hjlee">이호준 매니저/대리</option>
+                <option value="jmj">장민준 매니저/대리</option>
+                <option value="dyim">임대엽 매니저/대리</option>
+                <option value="jypark">박종연 팀장/부장</option>
+            </select>
+        </section>
+
+        <section>
+            <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3">02. 고객사</p>
+            <div class="space-y-2">
+                <input type="text" id="inOrg" oninput="render()" placeholder="고객사명" class="w-full p-3.5 bg-gray-50 border-none rounded-xl outline-none text-sm ring-1 ring-gray-200 focus:ring-2 focus:ring-red-500 transition-all">
+                <input type="text" id="inName" oninput="render()" placeholder="담당자 성함" class="w-full p-3.5 bg-gray-50 border-none rounded-xl outline-none text-sm ring-1 ring-gray-200 focus:ring-2 focus:ring-red-500 transition-all">
+            </div>
+        </section>
+
+        <section class="p-6 bg-white rounded-2xl border border-gray-200 space-y-4 shadow-sm">
+            <p class="text-[10px] font-black text-red-500 uppercase tracking-widest">03. 품목 추가</p>
+            <select id="inRobot" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl outline-none text-sm font-bold">
+                <option value="serviPlus">베어로보틱스 서비 플러스</option>
+                <option value="servi">베어로보틱스 서비</option>
+                <option value="cloi3">LG 클로이 서브봇 3세대</option>
+                <option value="keenonT9">키논 T9</option>
+                <option value="keenonT10">키논 T10</option>
+            </select>
+            <div class="grid grid-cols-2 gap-3">
+                <div class="space-y-1">
+                    <label class="text-[9px] font-bold text-gray-400 ml-1">수량 (EA)</label>
+                    <input type="number" id="inQty" value="1" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl outline-none text-sm text-center">
+                </div>
+                <div class="space-y-1" id="rentalPeriodInputGroup">
+                    <label class="text-[9px] font-bold text-gray-400 ml-1">기간 (개월)</label>
+                    <input type="number" id="inItemPeriod" value="36" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl outline-none text-sm text-center">
+                </div>
+            </div>
+            <div class="space-y-1">
+                <label class="text-[9px] font-bold text-gray-400 ml-1">단가 / 월 렌탈료</label>
+                <input type="number" id="inVal" placeholder="금액 입력" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl outline-none text-sm">
+            </div>
+            <input type="text" id="inItemNote" placeholder="비고 (특이사항)" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl outline-none text-xs">
+            <button onclick="addItem()" class="w-full bg-red-600 text-white py-3.5 rounded-xl font-bold text-sm hover:bg-red-700 transition active:scale-95">
+                품목 리스트에 추가
+            </button>
+        </section>
+
+        <div id="itemListUI" class="space-y-2"></div>
+
+        <div class="pt-6 border-t border-gray-100 flex items-center justify-between">
+            <label class="text-xs font-bold text-gray-500 cursor-pointer flex items-center">
+                <input type="checkbox" id="showTotal" onchange="render()" class="w-4 h-4 mr-2 accent-red-600"> 최종 합계 표시
+            </label>
+            <button onclick="items=[];render();" class="text-[10px] font-bold text-gray-300 hover:text-red-500 uppercase tracking-widest">Clear</button>
+        </div>
+    </div>
+</div>
+
+<div class="preview-main">
+    <div id="pdfArea">
+        <div class="flex justify-between items-start mb-16">
+            <img src="https://yckim225027.notion.site/image/attachment%3A183e437c-4e21-48d3-a7ca-32819b6a3b0c%3Aimage.png?table=block&id=2f68ca55-5663-8020-a42a-ccfe4eaa92a7&spaceId=780fbb65-75d5-4dd1-9539-c914ecec9019&width=1420&userId=&cache=v2" class="h-12 object-contain">
+            <div class="text-right">
+                <h2 id="vTitle" class="text-2xl font-black tracking-tight text-gray-900 border-b-2 border-red-600 pb-1 inline-block">렌탈견적서</h2>
+                <p class="text-[10px] font-bold text-gray-300 mt-2 tracking-widest" id="vDate">2026.01.29</p>
+            </div>
+        </div>
+
+        <div class="flex justify-between mb-20">
+            <div class="w-1/2 border-l-4 border-gray-100 pl-6">
+                <p class="text-[9px] font-black text-gray-300 uppercase tracking-widest mb-4">TO. 수신처</p>
+                <p class="text-xl font-bold text-gray-800 mb-1" id="vOrg">고객사명</p>
+                <p class="text-[13px] font-medium text-gray-400" id="vName">담당자 귀하</p>
+            </div>
+            <div class="w-1/2 text-right">
+                <p class="text-[9px] font-black text-gray-300 uppercase tracking-widest mb-4">FROM. 발신처</p>
+                <p class="text-sm font-bold text-gray-800">AJ네트웍스 로봇영업본부</p>
+                <p class="text-lg font-black text-gray-900 mt-1" id="vManagerName">김영찬 매니저</p>
+                <p class="text-[11px] font-medium text-gray-500 mt-1" id="vManagerContact">010-5785-6176 | yckim@ajnet.co.kr</p>
+            </div>
+        </div>
+
+        <div class="flex-grow">
+            <div class="flex border-b border-gray-900 pb-2 mb-1 text-[9px] font-black uppercase tracking-widest text-gray-400">
+                <div class="w-[30px]">No</div>
+                <div class="flex-1 px-4">Robot Description</div>
+                <div class="w-44 text-right">Pricing Details</div>
+            </div>
+            <div id="vQuoteBody"></div>
+        </div>
+
+        <div class="mt-12 pt-8 border-t border-gray-100 flex justify-between items-end">
+            <div class="text-[9px] text-gray-400 leading-relaxed">
+                * 견적 유효기간: 발행일로부터 14일<br>
+                * 부가세(VAT) 별도 기준
+            </div>
+            <div id="vTotalArea" class="hidden text-right">
+                <p class="text-[10px] font-black text-gray-300 uppercase tracking-widest mb-1">Total Amount</p>
+                <p id="vTotal" class="text-3xl font-black tracking-tighter text-gray-900">₩ 0</p>
+            </div>
+        </div>
+
+        <div class="mt-12 pt-6 border-t border-gray-50 text-[8px] font-bold text-gray-300 uppercase tracking-[0.2em] flex justify-between">
+            <span>Official Proposal</span>
+            <span>AJ NETWORKS CO., LTD.</span>
+        </div>
+    </div>
+</div>
+
+<script>
+let mode = 'rental';
+let items = [];
+
+const managers = {
+    yckim: { name: "김영찬 매니저", contact: "010-5785-6176 | yckim@ajnet.co.kr" },
+    ljm: { name: "이정민 매니저", contact: "010-2548-1130 | ljm1130@ajnet.co.kr" },
+    hjlee: { name: "이호준 매니저/대리", contact: "010-7159-5934 | hojun.lee@ajnet.co.kr" },
+    jmj: { name: "장민준 매니저/대리", contact: "010-6785-3484 | jmj0916@ajnet.co.kr" },
+    dyim: { name: "임대엽 매니저/대리", contact: "010-4785-1348 | bigleaf@ajnet.co.kr" },
+    jypark: { name: "박종연 팀장/부장", contact: "010-4785-0296 | pjy0813@ajnet.co.kr" }
+};
+
+const DB = {
+    serviPlus: { fullName: "베어로보틱스 서비 플러스", img: "https://yckim225027.notion.site/image/attachment%3Acf3feaff-c5a4-4bc0-b598-733f90ef7a80%3Aimage.png?table=block&id=2f68ca55-5663-8039-8f6e-c60aa701b67e&spaceId=780fbb65-75d5-4dd1-9539-c914ecec9019&width=1420&userId=&cache=v2", specs: ["535x550x1095mm", "4단 가변 선반", "최대 40kg", "12H 가동"] },
+    servi: { fullName: "베어로보틱스 서비", img: "https://www.bearrobotics.ai/static/media/servi.936006e8.png", specs: ["445x445x1150mm", "400mm 원형", "전체 30kg", "자동 충전"] },
+    cloi3: { fullName: "LG 클로이 서브봇 3세대", img: "https://www.lg.com/kr/images/business-robot/md07555813/gallery/medium01.jpg", specs: ["500x500x1300mm", "4단 오픈형", "전체 40kg", "11H 가동"] },
+    keenonT9: { fullName: "키논 다이너봇 T9", img: "https://www.keenon.com/Uploads/20220627/62b9529b3a3bc.png", specs: ["500x527x1266mm", "4단 높이조절", "전체 40kg", "최대 18H"] },
+    keenonT10: { fullName: "키논 다이너봇 T10", img: "https://www.keenon.com/Uploads/20220627/62b952f5b8c9b.png", specs: ["562x580x1230mm", "4단 오픈형", "전체 40kg", "23.8인치 스크린"] }
+};
+
+function setMode(m) {
+    mode = m;
+    document.getElementById('mRental').style.backgroundColor = m === 'rental' ? 'var(--aj-red)' : '#F3F4F6';
+    document.getElementById('mRental').style.color = m === 'rental' ? 'white' : '#6B7280';
+    document.getElementById('mPurchase').style.backgroundColor = m === 'purchase' ? 'var(--aj-red)' : '#F3F4F6';
+    document.getElementById('mPurchase').style.color = m === 'purchase' ? 'white' : '#6B7280';
+    document.getElementById('vTitle').innerText = m === 'rental' ? '렌탈견적서' : '구매견적서';
+    document.getElementById('rentalPeriodInputGroup').style.opacity = m === 'rental' ? '1' : '0.2';
+    render();
+}
+
+function addItem() {
+    const key = document.getElementById('inRobot').value;
+    const qty = parseInt(document.getElementById('inQty').value);
+    const val = parseInt(document.getElementById('inVal').value || 0);
+    const period = mode === 'rental' ? parseInt(document.getElementById('inItemPeriod').value || 1) : 1;
+    const itemNote = document.getElementById('inItemNote').value;
+    if(val <= 0) return alert("금액을 정확히 입력해주세요.");
+    items.push({ ...DB[key], qty, val, period, itemNote });
+    render();
+}
+
+function removeItem(idx) {
+    items.splice(idx, 1);
+    render();
+}
+
+function render() {
+    const managerKey = document.getElementById('inManager').value;
+    document.getElementById('vManagerName').innerText = managers[managerKey].name;
+    document.getElementById('vManagerContact').innerText = managers[managerKey].contact;
+    document.getElementById('vOrg').innerText = document.getElementById('inOrg').value || "고객사명";
+    document.getElementById('vName').innerText = (document.getElementById('inName').value || "담당자") + " 귀하";
+    document.getElementById('vDate').innerText = new Date().toLocaleDateString('ko-KR').replace(/\. /g, '.').replace(/\.$/, '');
+    
+    document.getElementById('itemListUI').innerHTML = items.map((item, i) => `
+        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-xl border border-gray-100 text-[11px] font-bold">
+            <span>${item.fullName} (x${item.qty})</span>
+            <button onclick="removeItem(${i})" class="text-red-500 font-black px-2">삭제</button>
+        </div>
+    `).join('');
+
+    let total = 0;
+    const bodyUI = document.getElementById('vQuoteBody');
+    bodyUI.innerHTML = items.map((item, i) => {
+        const itemTotal = mode === 'rental' ? item.qty * item.val * item.period : item.qty * item.val;
+        total += itemTotal;
+        return `
+            <div class="item-row">
+                <div class="no-badge">${(i + 1).toString().padStart(2, '0')}</div>
+                <div class="flex-1 px-4">
+                    <div class="flex items-center gap-3 mb-2">
+                        <p class="text-[13px] font-bold text-gray-800">${item.fullName}</p>
+                    </div>
+                    <div class="flex flex-wrap">
+                        ${item.specs.map(s => `<span class="spec-tag">${s}</span>`).join('')}
+                    </div>
+                    ${item.itemNote ? `<p class="text-[10px] font-bold text-red-600 mt-2 italic">※ ${item.itemNote}</p>` : ''}
+                </div>
+                <div class="w-16 flex-shrink-0 flex items-center justify-center mr-4">
+                    <img src="${item.img}" class="w-full object-contain mix-blend-multiply opacity-80" crossorigin="anonymous">
+                </div>
+                <div class="w-44 text-right flex flex-col justify-center border-l border-gray-50 pl-6">
+                    <div class="mb-2">
+                        <p class="info-label">${mode === 'rental' ? 'Monthly' : 'Price'}</p>
+                        <p class="info-value">₩ ${item.val.toLocaleString()}</p>
+                    </div>
+                    <div class="flex justify-end gap-3 mb-2 opacity-60">
+                        <div><p class="info-label">Qty</p><p class="text-[11px] font-bold">${item.qty}EA</p></div>
+                        ${mode === 'rental' ? `<div><p class="info-label">Term</p><p class="text-[11px] font-bold">${item.period}M</p></div>` : ''}
+                    </div>
+                    <div class="pt-2 border-t border-dotted border-gray-200">
+                        <p class="info-label">Subtotal</p>
+                        <p class="text-[10px] font-bold text-gray-300">₩ ${itemTotal.toLocaleString()}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    const isShowTotal = document.getElementById('showTotal').checked;
+    const totalArea = document.getElementById('vTotalArea');
+    if(isShowTotal && items.length > 0) {
+        totalArea.classList.remove('hidden');
+        document.getElementById('vTotal').innerText = "₩ " + Math.floor(total).toLocaleString();
+    } else {
+        totalArea.classList.add('hidden');
+    }
+}
+
+function downloadPDF() {
+    const element = document.getElementById('pdfArea');
+    const org = document.getElementById('inOrg').value || '견적서';
+    const opt = {
+        margin: 0, filename: `AJ_로봇견적서_${org}.pdf`,
+        image: { type: 'jpeg', quality: 1 },
+        html2canvas: { scale: 3, useCORS: true, letterRendering: true, scrollY: 0 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+    html2pdf().from(element).set(opt).save();
+}
+window.onload = function() { render(); };
+</script>
+</body>
+</html>
